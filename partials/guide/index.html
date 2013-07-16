@@ -1,0 +1,45 @@
+<h1><code ng:non-bindable=""></code>
+<span class="hint"></span>
+</h1>
+<div><h1 id="i18nextforangular">i18next for Angular</h2>
+
+<p>This guide will tell you how to use <a href="http://i18next.com">i18next</a> the right way with AngularJS. Please note that this guide is under development!</p>
+
+<p>Please checkout the <a href="https://github.com/archer96/ng-i18next/tree/master/examples">examples</a>.</p>
+
+<h2 id="quickstart">Quick Start</h3>
+
+<p>Install module via Bower (ng-i18next currently isn't in the bower repository):</p>
+
+<pre><code>$ bower install git://github.com/archer96/ng-i18next.git
+</code></pre>
+
+<p>Inject <code>ng-i18next</code> module as a dependency into your app:</p>
+
+<pre class="prettyprint linenums">
+angular.module('myApp', ['jm.i18next']);
+</pre>
+
+<p>Config <code>$i18nextProvider</code>:</p>
+
+<pre class="prettyprint linenums">
+angular.module('myApp').config(function($i18nextProvider) {
+	$i18nextProvider.options = {
+		useCookie: false,
+		useLocalStorage: false,
+		resGetPath: '../locales/__lng__/__ns__.json',
+		lng: 'de'
+		// for more visit http://i18next.com
+	};
+});
+</pre>
+
+<p>Translate your app:</p>
+
+<pre class="prettyprint linenums">
+&lt;h1 ng-i18next="title"&gt;&lt;/h1&gt;
+&lt;p ng-i18next="[html]someHTML"&gt;&lt;/p&gt;
+&lt;p&gt;{{ 'someText' | i18next }}&lt;/p&gt;
+</pre>
+
+<p>For more read the full guide.</p></div>

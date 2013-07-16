@@ -1,308 +1,202 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=640" />
-
-    <link rel="stylesheet" href="stylesheets/core.css" media="screen"/>
-    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)"/>
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
-
-    <script type="text/javascript" src="javascripts/modernizr.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function () {
-        $('#main_content').headsmart()
-      })
-    </script>
-    <title>ng-i18next by archer96</title>
-  </head>
-
-  <body>
-    <a id="forkme_banner" href="https://github.com/archer96/ng-i18next">View on GitHub</a>
-    <div class="shell">
-
-      <header>
-        <span class="ribbon-outer">
-          <span class="ribbon-inner">
-            <h1>ng-i18next</h1>
-            <h2>translation for AngularJS using i18next</h2>
-          </span>
-          <span class="left-tail"></span>
-          <span class="right-tail"></span>
-        </span>
-      </header>
-
-      <section id="downloads">
-        <span class="inner">
-          <a href="https://github.com/archer96/ng-i18next/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/archer96/ng-i18next/tarball/master" class="tgz"><em>download</em> .TGZ</a>
-        </span>
-      </section>
-
-
-      <span class="banner-fix"></span>
-
-
-      <section id="main_content">
-        <h1>
-<a name="ng-i18next---use-i18next-with-angularjs" class="anchor" href="#ng-i18next---use-i18next-with-angularjs"><span class="octicon octicon-link"></span></a>ng-i18next - use i18next with Angularjs</h1>
-
-<p>Project goal is to provide an easy way to use <a href="http://i18next.com/">i18next</a> with <a href="http://angularjs.org/">AngularJS</a>:</p>
-
-<ul>
-<li>
-<code>ng-i18next</code> directive</li>
-<li>
-<code>i18next</code> filter</li>
-</ul><p>First check out the <a href="http://i18next.com">documentation</a> by Jan Mühlemann.</p>
-
-<h1>
-<a name="features" class="anchor" href="#features"><span class="octicon octicon-link"></span></a>Features</h1>
-
-<ul>
-<li>AngularJS directive</li>
-<li>AngularJS filter</li>
-<li>variable binding (translates again, if variable changes)</li>
-<li>nested translations (<code>$t('hello')</code>; see i18next documentation)</li>
-<li>scope variables in translations (if the translation contains directives of variables like <code>{{hello}}</code>, they'll get compiled)</li>
-</ul><h1>
-<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h1>
-
-<p>First add</p>
-
-<ul>
-<li>AngularJS</li>
-<li>i18next</li>
-<li>ng-i18next</li>
-</ul><p>to your HTML file.</p>
-
-<p>Make sure you require <code>jm.i18next</code> as a dependency of your AngularJS module. Also configurate the provider first:</p>
-
-<div class="highlight"><pre><span class="nx">angular</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span><span class="s1">'jm.i18next'</span><span class="p">).</span><span class="nx">config</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">$i18nextProvider</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">$i18nextProvider</span><span class="p">.</span><span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="nx">lng</span><span class="o">:</span> <span class="s1">'de'</span><span class="p">,</span>
-        <span class="nx">useCookie</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-        <span class="nx">useLocalStorage</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-        <span class="nx">fallbackLng</span><span class="o">:</span> <span class="s1">'dev'</span><span class="p">,</span>
-        <span class="nx">resGetPath</span><span class="o">:</span> <span class="s1">'../locales/__lng__/__ns__.json'</span>
-    <span class="p">};</span>
-<span class="p">});</span>
-</pre></div>
-
-<p>For more options visit the <a href="http://i18next.com/pages/doc_init.html">i18next documentation</a>.</p>
-
-<p>There are two ways to use <code>ng-i18next</code>:</p>
-
-<h2>
-<a name="filter" class="anchor" href="#filter"><span class="octicon octicon-link"></span></a>filter</h2>
-
-<pre><code>&lt;p&gt;{{'hello' | i18next}}&lt;/p&gt;
-</code></pre>
-
-<p>=&gt; translates <code>hello</code></p>
-
-<pre><code>&lt;p&gt;{{hello | i18next}}&lt;/p&gt;
-</code></pre>
-
-<p>=&gt; translates <code>$scope.hello</code></p>
-
-<h2>
-<a name="directive" class="anchor" href="#directive"><span class="octicon octicon-link"></span></a>directive</h2>
-
-<h3>
-<a name="basics" class="anchor" href="#basics"><span class="octicon octicon-link"></span></a>Basics</h3>
-
-<pre><code>&lt;p ng-i18next="hello"&gt;&lt;/p&gt;
-</code></pre>
-
-<p>=&gt; translates <code>hello</code></p>
-
-<pre><code>&lt;p ng-i18next="{{hello}}"&gt;&lt;/p&gt;
-</code></pre>
-
-<p>=&gt; translates <code>$scope.hello</code></p>
-
-<pre><code>&lt;p ng-i18next&gt;hello&lt;/p&gt;
-</code></pre>
-
-<p>=&gt; translates <code>hello</code> (uses the content of the p-tag)</p>
-
-<pre><code>&lt;p ng-i18next&gt;{{hello}}&lt;/p&gt;
-</code></pre>
-
-<p>=&gt; translates <code>$scope.hello</code> (uses the content of the p-tag)</p>
-
-<p>Note, that HTML isn't compiled!</p>
-
-<h3>
-<a name="html" class="anchor" href="#html"><span class="octicon octicon-link"></span></a>HTML</h3>
-
-<pre><code>&lt;p ng-i18next="[html]hello"&gt;&lt;/p&gt;
-</code></pre>
-
-<p>=&gt; translates <code>hello</code> and compiles HTML</p>
-
-<pre><code>&lt;p ng-i18next="[html]{{hello}}"&gt;&lt;/p&gt;
-</code></pre>
-
-<p>=&gt; translates <code>$scope.hello</code> and compiles HTML</p>
-
-<h3>
-<a name="attributes" class="anchor" href="#attributes"><span class="octicon octicon-link"></span></a>Attributes</h3>
-
-<pre><code>&lt;a href="#" ng-i18next="[title]hello"&gt;This is a link.&lt;/a&gt;
-</code></pre>
-
-<p>=&gt; translates <code>hello</code> and sets it as the title</p>
-
-<pre><code>&lt;a href="#" ng-i18next="[title]{{hello}}"&gt;This is a link.&lt;/a&gt;
-</code></pre>
-
-<p>=&gt; translates <code>$scope.hello</code> and sets it as the title</p>
-
-<p>You can combine both, too!</p>
-
-<h3>
-<a name="attributes--text-content" class="anchor" href="#attributes--text-content"><span class="octicon octicon-link"></span></a>Attributes + text content</h3>
-
-<pre><code>&lt;a href="#" ng-i18next="[title]hello;content"&gt;&lt;/a&gt;
-</code></pre>
-
-<p>=&gt; translates <code>hello</code> and sets it as the title
-=&gt; translates <code>content</code> and sets it as the text of the link.</p>
-
-<pre><code>&lt;a href="#" ng-i18next="[title]{{hello}};{{content}}"&gt;&lt;/a&gt;
-</code></pre>
-
-<p>=&gt; translates <code>$scope.hello</code> and sets it as the title
-=&gt; translates <code>$scope.content</code> and sets it as the text of the link.</p>
-
-<h3>
-<a name="attributes--html-content" class="anchor" href="#attributes--html-content"><span class="octicon octicon-link"></span></a>Attributes + HTML content</h3>
-
-<pre><code>&lt;a href="#" ng-i18next="[title]hello;[html]content"&gt;&lt;/a&gt;
-</code></pre>
-
-<p>=&gt; translates <code>hello</code> and sets it as the title
-=&gt; translates <code>content</code> and compiles the HTML as the content of the link.</p>
-
-<pre><code>&lt;a href="#" ng-i18next="[title]{{hello}};[html]{{content}}"&gt;&lt;/a&gt;
-</code></pre>
-
-<p>=&gt; translates <code>$scope.hello</code> and sets it as the title
-=&gt; translates <code>$scope.content</code> and compiles the HTML as the content of the link.</p>
-
-<h3>
-<a name="passing-options" class="anchor" href="#passing-options"><span class="octicon octicon-link"></span></a>Passing Options</h3>
-
-<p>You can also pass options:</p>
-
-<pre><code>&lt;p ng-i18next="[i18next]({lng:'de'})hello"&gt;&lt;/p&gt;
-</code></pre>
-
-<p>=&gt; translates <code>hello</code> in German (<code>de</code>)</p>
-
-<h3>
-<a name="passing-options--html" class="anchor" href="#passing-options--html"><span class="octicon octicon-link"></span></a>Passing Options + HTML</h3>
-
-<p>You can also pass options:</p>
-
-<pre><code>&lt;p ng-i18next="[html:i18next]({lng:'de'})hello"&gt;&lt;/p&gt;
-</code></pre>
-
-<p>=&gt; translates <code>hello</code> in German (<code>de</code>) and compiles it to HTML code.</p>
-
-<hr><p>For more, see examples.</p>
-
-<hr><h1>
-<a name="contribute" class="anchor" href="#contribute"><span class="octicon octicon-link"></span></a>Contribute</h1>
-
-<p>To contribute, you must have:</p>
-
-<ul>
-<li><a href="http://nodejs.org/">Node.js</a></li>
-<li><a href="http://bower.io/">bower</a></li>
-</ul><p>installed.</p>
-
-<p>Load all dependencies using <a href="https://npmjs.org/"><code>npm</code></a> and <a href="http://bower.io/"><code>bower</code></a>:</p>
-
-<pre><code>npm install
-bower install
-</code></pre>
-
-<p>Build <code>ng-i18next.js</code> using Grunt:</p>
-
-<pre><code>grunt
-</code></pre>
-
-<hr><h1>
-<a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Examples</h1>
-
-<p>You can run the examples using:</p>
-
-<pre><code>grunt server
-</code></pre>
-
-<p><em>(note that you have to be in the root directory of this project)</em></p>
-
-<hr><h1>
-<a name="changelog" class="anchor" href="#changelog"><span class="octicon octicon-link"></span></a>Changelog</h1>
-
-<p>v0.2.5</p>
-
-<ul>
-<li>fixed some minor bugs (in filter)</li>
-</ul><p>v0.2.4</p>
-
-<ul>
-<li>removed unnecessary code in provider.js</li>
-<li>fixed issue #14 where auto detection of language didn't work</li>
-</ul><p>v0.2.3</p>
-
-<ul>
-<li>fixed minification</li>
-<li>not using <code>ngmin</code> anymore</li>
-</ul><p>v0.2.2</p>
-
-<ul>
-<li>you can now pass options to a directive</li>
-<li>new tests and Gruntfile (now supports <code>grunt server</code>)</li>
-<li>updated dependencies in package.json</li>
-<li>you can now pass options to the filter</li>
-</ul><p>v0.2.1</p>
-
-<ul>
-<li>it is now possible to change options at runtime (and not only in <code>.config()</code>)</li>
-<li>the dist folder was added</li>
-</ul><p>v0.2</p>
-
-<ul>
-<li>completly new version</li>
-<li>
-<code>i18next</code> provider, directive and filter</li>
-</ul><p>v0.1</p>
-
-<ul>
-<li>first version</li>
-</ul>
-      </section>
-
-      <footer>
-        <span class="ribbon-outer">
-          <span class="ribbon-inner">
-            <p>this project by <a href="https://github.com/archer96">archer96</a> can be found on <a href="https://github.com/archer96/ng-i18next">GitHub</a></p>
-          </span>
-          <span class="left-tail"></span>
-          <span class="right-tail"></span>
-        </span>
-        <p>Generated with <a href="http://pages.github.com">GitHub Pages</a> using Merlot</p>
-        <span class="octocat"></span>
-      </footer>
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7 ng-app: docsApp;" lang="en" ng-controller="DocsController"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8 ng-app: docsApp;" lang="en" ng-controller="DocsController"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9 ng-app: docsApp;" lang="en" ng-controller="DocsController"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js ng-app: docsApp;" lang="en" ng-controller="DocsController"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="Description"
+        content="AngularJS is what HTML would have been, had it been designed for building web-apps.
+                 Declarative templates with data-binding, MVC, dependency injection and great
+                 testability story all implemented with pure client-side JavaScript!">
+  <meta name="fragment" content="!">
+  <title ng-bind-template="ng-i18next: {{partialTitle}}">Docs</title>
+  <script type="text/javascript">
+    // dynamically add base tag as well as css and javascript files.
+    // we can't add css/js the usual way, because some browsers (FF) eagerly prefetch resources
+    // before the base attribute is added, causing 404 and terribly slow loading of the docs app.
+    (function() {
+      var indexFile = (location.pathname.match(/\/(index[^\.]*\.html)/) || ['', ''])[1],
+          rUrl = /(#!\/|guide|index[^\.]*\.html).*$/,
+          baseUrl = location.href.replace(rUrl, indexFile),
+          headEl = document.getElementsByTagName('head')[0],
+          sync = true;
+
+      addTag('base', {href: baseUrl});
+      addTag('link', {rel: 'stylesheet', href: 'css/bootstrap.min.css', type: 'text/css'});
+      addTag('link', {rel: 'stylesheet', href: 'css/font-awesome.css', type: 'text/css'});
+      addTag('link', {rel: 'stylesheet', href: 'css/docs.css', type: 'text/css'});
+      addTag('link', {rel: 'stylesheet', href: 'css/animations.css', type: 'text/css'});
+      
+      
+        addTag('script', {src: 'js/angular.min.js'}, sync);
+      
+      addTag('script', {src: 'js/angular-bootstrap.min.js'}, sync);
+      addTag('script', {src: 'js/angular-bootstrap-prettify.min.js'}, sync);
+      addTag('script', {src: 'js/docs-setup.js'}, sync);
+      addTag('script', {src: 'js/docs.js'}, sync);
+
+      function addTag(name, attributes, sync) {
+        var el = document.createElement(name),
+            attrName;
+
+        for (attrName in attributes) {
+          el.setAttribute(attrName, attributes[attrName]);
+        }
+
+        sync ? document.write(outerHTML(el)) : headEl.appendChild(el);
+      }
+
+      function outerHTML(node){
+        // if IE, Chrome take the internal method otherwise build one
+        return node.outerHTML || (
+            function(n){
+                var div = document.createElement('div'), h;
+                div.appendChild(n);
+                h = div.innerHTML;
+                div = null;
+                return h;
+            })(node);
+      }
+    })();
+
+  </script>
+</head>
+
+<body>
+  <header class="header">
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          
+            <a class="brand">ng-i18next</a>
+          
+          <ul class="nav">
+            <li ng-repeat="(url, name) in sections" ng-class="{active: isActivePath(url)}">
+              <a ng-href="{{url}}"><i class="icon-book icon-white"></i> {{name}}</a>
+            </li>
+          </ul>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div role="main" class="container">
+    <div class="row clear-navbar"></div>
+
+    <div class="row">
+      <div class="span12">
+        <!--[if lt IE 7]>
+        <p class="alert alert-error">Your browser is <em>ancient!</em>
+          <a href="http://browsehappy.com/">Upgrade to a different browser</a> or
+          <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to
+          experience this site.
+        </p>
+        <![endif]-->
+
+        <!--[if lt IE 9]>
+        <div class="alert">
+          You are using an old version of Internet Explorer.
+          For better and safer browsing experience please <a href="http://www.microsoft.com/IE9">upgrade IE</a>
+          or install <a href="http://google.com/chrome">Google Chrome browser</a>.
+        </div>
+        <![endif]-->
+      </div>
 
     </div>
 
-    
-  </body>
+    <div class="row">
+      <div class="span3">
+        <form class="well form-search" ng-submit="submitForm()">
+          <div class="dropdown search"
+               ng-class="{open: focused && bestMatch.rank > 0 && bestMatch.page != currentPage}">
+            <input type="text" ng-model="search" placeholder="search the docs"
+                   tabindex="1" accesskey="s" class="input-medium search-query" focused="focused">
+            <ul class="dropdown-menu">
+              <li>
+                <a href="{{bestMatch.page.url}}">{{bestMatch.page.shortName}}</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="spacer"></div>
+
+          <ul class="nav nav-list" ng-hide="page">
+            <li ng-repeat="page in pages track by page.url" ng-class="navClass(page)" class="api-list-item">
+              <a href="{{page.url}}" tabindex="2">{{page.shortName}}</a>
+            </li>
+          </ul>
+
+          <ul class="nav nav-list well" ng-repeat="module in modules track by module.url" class="api-list-item">
+            <li class="nav-header module">
+              <a class="guide">module</a>
+              <a class="code" href="{{module.url}}">{{module.name}}</a>
+            </li>
+
+            <li ng-repeat="page in module.others track by page.url" ng-animate="'expand'" ng-class="navClass(page)" class="api-list-item">
+              <a href="{{page.url}}" tabindex="2">{{page.shortName}}</a>
+            </li>
+
+            <li class="nav-header section" ng-show="module.directives">
+              <a class="guide">directive</a>
+            </li>
+            <li ng-repeat="page in module.directives track by page.url" ng-animate="'expand'" ng-class="navClass(page)" class="api-list-item">
+              <a href="{{page.url}}" tabindex="2">{{page.shortName}}</a>
+            </li>
+
+            <li class="nav-header section" ng-show="module.filters">
+              <a class="guide">filter</a>
+            </li>
+            <li ng-repeat="page in module.filters track by page.url" ng-animate="'expand'" ng-class="navClass(page)" class="api-list-item">
+              <a href="{{page.url}}" tabindex="2">{{page.shortName}}</a>
+            </li>
+
+            <li class="nav-header section" ng-show="module.services">
+              <a class="guide">service</a>
+            </li>
+            <li ng-repeat="service in module.services track by service.instance.url" ng-animate="'expand'" ng-class="navClass(service.instance, service.provider)" class="api-list-item">
+              <a ng-show="service.provider" class="pull-right" href="{{service.provider.url}}" tabindex="2"><i class="icon-cog"></i></a>
+              <a href="{{service.instance.url}}" tabindex="2">{{service.name}}</a>
+            </li>
+
+            <li class="nav-header section" ng-show="module.types">
+              <a class="guide">Types</a>
+            </li>
+            <li ng-repeat="page in module.types track by page.url" ng-animate="'expand'" ng-class="navClass(page)" class="api-list-item">
+              <a href="{{page.url}}" tabindex="2">{{page.shortName}}</a>
+            </li>
+
+            <li class="nav-header section" ng-show="module.globals">
+              <a class="global guide">global APIs</a>
+              &nbsp;
+            </li>
+            <li ng-repeat="page in module.globals track by page.url" ng-animate="'expand'" ng-class="navClass(page)" class="api-list-item">
+              <a href="{{page.url}}" tabindex="2">{{page.id}}</a>
+            </li>
+
+          </ul>
+
+        </form>
+      </div>
+      <div class="span9">
+
+        <ul class="breadcrumb">
+          <li ng-repeat="crumb in breadcrumb">
+            <span ng-hide="crumb.url">{{crumb.name}}</span>
+            <a ng-show="crumb.url" href="{{crumb.url}}">{{crumb.name}}</a>
+            <span ng-show="crumb.url" class="divider">/</span>
+          </li>
+        </ul>
+
+        <div id="loading" ng-show="loading">Loading...</div>
+
+        <div ng-hide="loading" ng-include src="currentPage.partialUrl" onload="afterPartialLoaded()" autoscroll class="content" ng-animate="{enter: 'slide-reveal'}" ></div>
+
+      </div>
+    </div>
+  </div>
+
+</body>
 </html>
