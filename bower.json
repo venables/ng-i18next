@@ -4,7 +4,7 @@
   "version": "0.3.1",
   "dependencies": {
     "angular": "~1.2",
-    "i18next": "~1.7.2"
+    "i18next": "git@github.com:venables/i18next.git#b3ab9269011c7cb230915b3a9854ae528a37b763"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.6"
